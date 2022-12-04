@@ -1,4 +1,3 @@
-from collections import Counter
 import itertools
 
 def p3_1(f):
@@ -7,11 +6,10 @@ def p3_1(f):
     for i in f:
         a = i.rstrip()
         l = len(a)//2
-        q1 = Counter(a[:l])
-        q2 = Counter(a[l:])
-        for k in q1.keys():
-            if q2[k] >= 1:
-                ans += P.index(k)
+        q1,q2 = set(a[:l]),set(a[l:])
+        q = q1 & q2
+        for k in q:
+            ans += P.index(k)
     return ans
 
 def p3_2(f):

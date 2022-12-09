@@ -16,12 +16,10 @@ def p1(m,sz):
             for q in range(sz-1):
                 d1 = H[q][0] - H[q+1][0]
                 d2 = H[q][1] - H[q+1][1]
-                k1 = min(1, max(-1, d1))
-                k2 = min(1, max(-1, d2))
 
                 if abs(d1) > 1 or abs(d2) > 1:
-                    H[q+1][0] += k1
-                    H[q+1][1] += k2
+                    H[q+1][0] += min(1, max(-1, d1))
+                    H[q+1][1] += min(1, max(-1, d2))
             tpos.add(str(H[-1]))
     print(len(tpos))
 

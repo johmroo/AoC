@@ -19,12 +19,9 @@ def p1(m,sz):
                 k1 = min(1, max(-1, d1))
                 k2 = min(1, max(-1, d2))
 
-                if abs(d1) > 1:
+                if abs(d1) > 1 or abs(d2) > 1::
                     H[q+1][0] += k1
                     H[q+1][1] += k2
-                elif abs(d2) > 1:
-                    H[q+1][0] += k1
-                    H[q+1][1] += k2 
             tpos.add(str(H[-1]))
     print(len(tpos))
 

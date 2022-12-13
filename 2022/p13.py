@@ -3,9 +3,8 @@ def cmp(x,y):
         if type(y) == int: return x - y
         else: return cmp([x], y)
     elif type(y) == int: return cmp(x, [y])    
-    for a,b in zip(x, y):
-        v = cmp(a,b)
-        if v: return v
+    for a,b in zip(x, y): 
+        if v:= cmp(a,b): return v
     return len(x) - len(y)
 
 f = open("2022/day13.txt")

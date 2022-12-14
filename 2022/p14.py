@@ -18,11 +18,10 @@ cave = set()
 for l in f:
     x = [list(map(int, p.split(","))) for p in l.split(" -> ")]
     for (x1,y1),(x2,y2) in zip(x,x[1:]):
-        x1, x2 = sorted([x1,x2])
-        y1, y2 = sorted([y1,y2])
-        for x in range(x1,x2+1):
-            for y in range(y1,y2+1):
-                cave.add((x,y))
+        d1,d2 = x2-x1,y2-y1
+        dist = max(abs(d1),abs(d2))
+        d1,d2 = d1//dist,d2//dist
+        for i in range(dist+1): cave.add((x1+i*d1,y1+i*d2))
 
 cave_floor = 1+max(x[1] for x in cave)
 cave2 = cave.copy()

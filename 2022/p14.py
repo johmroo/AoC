@@ -15,13 +15,13 @@ def solve(c,b,n):
 
 f = open("2022/day14.txt")
 cave = set()
-for line in open("2022/day14.txt"):
-    x = [list(map(int, p.split(","))) for p in line.split(" -> ")]
-    for (x1, y1), (x2, y2) in zip(x, x[1:]):
-        x1, x2 = sorted([x1, x2])
-        y1, y2 = sorted([y1, y2])
-        for x in range(x1, x2 + 1):
-            for y in range(y1, y2 + 1):
+for l in f:
+    x = [list(map(int, p.split(","))) for p in l.split(" -> ")]
+    for (x1,y1),(x2,y2) in zip(x,x[1:]):
+        x1, x2 = sorted([x1,x2])
+        y1, y2 = sorted([y1,y2])
+        for x in range(x1,x2+1):
+            for y in range(y1,y2+1):
                 cave.add((x,y))
 
 cave_floor = 1+max(x[1] for x in cave)

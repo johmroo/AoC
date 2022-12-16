@@ -39,16 +39,12 @@ for k in range(n):
             dist[(i,j)] = min(dist[(i,j)], dist[(i,k)] + dist[(k,j)])
 
 @cache
-def solve(cur,t,im):
-    best,i = 0,0
-    m = 1
-    while m <= im:
+def solve2(i,t,im):
+    best,m = 0,1
+    for next in  pnodes:
         if m & im:
-            next = pnodes[i]
-            if t + 1 >= dist[(cur,next)]:
-                tn = t-dist[(cur,next)] - 1
+            if (tn := t-dist[(i,next)] - 1) >= 0:
                 best = max(best, solve(next,tn,im - m) + tn * p[next])
-        i += 1
         m <<=1
     return best
 

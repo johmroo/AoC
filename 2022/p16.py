@@ -1,5 +1,6 @@
 from collections import defaultdict
 from functools import cache
+import re
 
 p = {} 
 nidx  = {}
@@ -12,25 +13,13 @@ def get_node(node: str):
     return nidx[node]
 
 f = open("2022/day16.txt")
-
-for l in f:
-    l = l.strip()
-    l = l.replace("Valve ","")
-    l = l.replace(" has flow rate","")
-    l = l.replace(" tunnels lead to valve ","")
-    l = l.replace(" tunnels lead to valves ","")
-    l = l.replace(" tunnel leads to valve ","")
-    l = l.replace(" tunnel leads to valves ","")
-    l = l.replace(" ","")
-        
-    s,b = l.split(";")
-    vid,flow= s.split("=")
-    flow = int(flow)
-    b = b.split(',')
+REGEX = r"^Valve (\w+) has flow rate=(\d+); tunnels? leads? to valves? ([\w ,]+)$"
+for vid, flow, b in re.findall(REGEX, f.read(), re.MULTILINE):
     src = get_node(vid)
-    for i in b: dist[(get_node(i), src)] = 1
+    flow = int(flow)
     p[src] = flow
     if flow > 0: pnodes.append(src)
+    for i in b.split(", "): dist[(get_node(i), src)] = 1
 
 n = len(nidx)
 for k in range(n):

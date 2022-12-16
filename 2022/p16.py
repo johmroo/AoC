@@ -28,7 +28,7 @@ for k in range(n):
             dist[(i,j)] = min(dist[(i,j)], dist[(i,k)] + dist[(k,j)])
 
 @cache
-def solve2(i,t,im):
+def solve(i,t,im):
     best,m = 0,1
     for next in  pnodes:
         if m & im:

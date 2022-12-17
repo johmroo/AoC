@@ -22,18 +22,18 @@ hist = {}
 top,w,t,ex = 0,0,0,0
 mt = 1000000000000
 while t<mt:
+    # look for rock pattern
+    rockid = (t%5,w) 
+    if t>2022 and rockid in hist:
+        topx,tx = hist[rockid]
+        dy,dt = top-topx,t-tx
+        skip = (mt-t)//dt
+        t += skip*dt  # just step fwd in time, top remains the same
+        ex += skip*dy # remember how many we skipped, to be added at the end
+    hist[rockid] = (top,t)
+    
     rock = set([(a,top+4+b) for a,b in rocks[t%5]])
     while True:
-        # look for rock pattern
-        rockid = (t%5,w) 
-        if t>2022 and rockid in hist:
-            topx,tx = hist[rockid]
-            dy,dt = top-topx,t-tx
-            skip = (mt-t)//dt
-            t += skip*dt  # just step fwd in time, top remains the same
-            ex += skip*dy # remember how many we skipped, to be added at the end
-        hist[rockid] = (top,t)
-
         nrock = right(rock) if wind[w]=='>' else left(rock)
         if not nrock & cave: rock = nrock
         w = (w+1)%len(wind)

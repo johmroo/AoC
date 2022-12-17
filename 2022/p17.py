@@ -38,11 +38,10 @@ while t<mt:
         if not nrock & cave: rock = nrock
         w = (w+1)%len(wind)
         nrock = set([(x,y-1) for (x,y) in rock]) 
-        if nrock & cave:
-            top = max(top,max([y for (_,y) in rock]))
-            cave |= rock
-            break
-        else: rock = nrock
+        if nrock & cave: break
+        rock = nrock
+    top = max(top,max([y for (_,y) in rock]))
+    cave |= rock
     t += 1
     if t==2022: print(top)
 print(top+ex)

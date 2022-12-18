@@ -9,8 +9,8 @@ for l in f:
 def solve1():
     c = 0
     for (x,y,z) in m:
-        for q in [((x+1,y,z)),(x-1,y,z),(x,y+1,z),(x,y-1,z),(x,y,z+1),(x,y,z-1)]:
-            if not q in m: c += 1
+        q = set([((x+1,y,z)),(x-1,y,z),(x,y+1,z),(x,y-1,z),(x,y,z+1),(x,y,z-1)])
+        c += 6-len(q&m)
     print(c)
 
 lim = 1500
